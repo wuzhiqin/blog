@@ -14,6 +14,11 @@ use  qc\api\QC;
 class Test extends Base
 {
 
+    public function ts()
+    {
+        echo 'hello word';
+    }
+
     public function tt()
     {
         session_start();
