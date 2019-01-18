@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>W.Z.Q博客</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="keywords" content="W.Z.Q" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="apple-touch-icon-precomposed" href="/static/admin/images/icon/icon.png">
+<link rel="shortcut icon" href="/static/admin/images/icon/favicon.ico">
+<link href="/static/home/css/base.css" rel="stylesheet">
+<link href="/static/home/css/index.css" rel="stylesheet">
+<link href="/static/home/css/scrolltops.css" rel="stylesheet">
+<script src="/static/home/music/APlayer.min.js"></script>
+<link rel="stylesheet" href="/static/home/music/APlayer.min.css">
+<link rel="stylesheet" type="text/css" href="/static/home/dist/swipeslider.css">
+
+<script src="/static/admin/js/jquery-3.1.1.min.js"></script>
+<script src="/static/admin/js/jquery-2.1.4.min.js"></script>
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+
+<header>
+  <div id="mnav">
+    <h2><span class="navicon"></span></h2>
+    <ul>
+      <li><a href="/">网站首页</a></li>
+      <li><a href="/about.html">关于我</a></li>
+      <li><a href="/lists.html">学无止境</a></li>
+      <li><a href="/slowLife.html">慢生活</a></li>
+      <li><a href="/">留言</a></li>
+    </ul>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="/">网站首页</a></li>
+      <li><a href="/about.html">关于我</a></li>
+      <li><a href="/lists.html">学无止境</a></li>
+      <li><a href="/slowLife.html">慢生活</a></li>
+      <li><a href="/">留言</a></li>
+    </ul>
+  </nav>
+  
+   <!-- 火箭 -->
+<div style="display: none;" id="rocket-to-top">
+    <div style="opacity:0;display: block;" class="level-2"></div>
+    <div class="level-3"></div>
+</div>
+
+
+</header>
+
+{block name="body"}{/block}
+
+{block name="search"}
+    <div class="search">
+      <form action="keyword.html" method="GET" name="searchform" id="searchform">
+        <input name="keyword" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
+        <input name="show" value="title" type="hidden">
+        <input name="tempid" value="1" type="hidden">
+        <input name="tbname" value="news" type="hidden">
+        <input name="Submit" class="input_submit" value="搜索" type="submit">
+      </form>
+    </div>
+    <div class="paihang">
+    	<h2 class="ab_title"><a href="/">天气预报</a></h2>
+    	<div class="aplayer">
+    	<iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=48" width="440" height="45" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+    	</div>
+    </div>
+    <div class="paihang">
+      <h2 class="ab_title"><a href="/">阅读排行</a></h2>
+      <ul>
+      {volist name="ranking_data" id="list"}
+        <li><b><a href="listview.html?id={$list.id}" target="_blank">【{$list.title}】</a></b>
+          <p>{if strlen($list.content_desc) > 48}{:mb_substr($list.content_desc,0,48,"utf-8").'....'}{else}{$list.content_desc}{/if}</p>
+        </li>
+      {/volist}
+      </ul>
+      <div class="ad"></div>
+    </div>
+    <div class="paihang">
+      <h2 class="ab_title"><a href="/">音乐鉴赏</a></h2>
+      <div class="demo">
+        <div id="player3" class="aplayer">
+            <pre class="aplayer-lrc-content">
+                [00:00.00]Jar Of Love
+        [00:00.08]演唱：曲婉婷
+        [00:00.22]
+        [00:01.00]Another sunrise, another sunset
+        [00:05.10]Soon it'll all be yesterday
+        [00:08.33]Another good day, another bad day,
+        [00:12.77]What did you do today?
+        [00:15.95]Why do we choose to chase what we'll lose?
+        [00:19.77]What you want isn't what you have.
+        [00:23.34]What you have may not be yours, to keep.
+        [00:31.29]If I could find love, at a stop, in a park with open arms,
+            </pre>
+        </div>
+  </div>
+
+      </div>
+<div class="paihang">
+      <h2 class="ab_title"><a href="/">随机推荐</a></h2>
+      <ul>
+		{if !empty($recommend_data)}
+      	{volist name="recommend_data" id="list"}
+        <li><b><a href="listview.html?id={$list.id}" target="_blank">【{$list.title}】</a></b>
+          <p>{if strlen($list.content_desc) > 48}{:mb_substr($list.content_desc,0,48,"utf-8").'....'}{else}{$list.content_desc}{/if}</p>
+        </li>
+        {/volist}
+        {/if}
+      </ul>
+      <div class="ad"><img src="/static/home/picture/007.jpg"></div>
+    </div>
+    <div class="links">
+      <h2 class="ab_title">友情链接</h2>
+      <ul>
+        <li><a href="/">W.Z.Q</a></li>
+      </ul>
+    </div>
+{/block}
+    <div class="weixin">
+      <h2 class="ab_title">官方微信</h2>
+      <ul>
+        <img src="/static/admin/images/WeChat.jpg">
+      </ul>
+    </div>
+  </div>
+</article>
+<footer>
+  <p>Design by <a href="http://www.wzq8.top">W.Z.Q个人博客</a> <a href="/">蜀ICP备</a></p>
+</footer>
+<script src="/static/home/js/base.js"></script>
+</body>
+</html>

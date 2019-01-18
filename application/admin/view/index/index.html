@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>登录 - W.Z.Q博客管理系统</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/static/admin/css/login.css">
+<link rel="apple-touch-icon-precomposed" href="/static/admin/images/icon/icon.png">
+<link rel="shortcut icon" href="/static/admin/images/icon/favicon.ico">
+<script src="/static/admin/js/jquery-3.1.1.min.js"></script>
+</head>
+
+<body class="user-select">
+<div class="container">
+  <div class="siteIcon"><img src="/static/admin/images/icon/icon.png" alt="" data-toggle="tooltip" data-placement="top" title="欢迎使用淺夏博客管理系统" draggable="false" /></div>
+  <div class="form-signin">
+  <h2 class="form-signin-heading">管理员登录</h2>
+      <form method="POST" autocomplete="off" class="form-horizontal" id='login'>
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-3 control-label">用户名:</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="admin_name" name="admin_name" placeholder="UserName" required autofocus maxlength="20">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputadmin_password3" class="col-sm-3 control-label">密码:</label>
+          <div class="col-sm-9">
+            <input type="password" class="form-control" id="admin_password" name="admin_password" placeholder="Password" required autofocus>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputCaptcha3" class="col-sm-3 control-label">验证码:</label>
+          <div class="col-sm-5">
+            <input type="Captcha" class="form-control" id="Captcha" name="captcha" placeholder="Captcha" required autofocus>
+          </div>
+          <div class="col-sm-4">
+            <a class="Captcha-img"><img src="/admin/index/getCaptcha"></a>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-0 col-sm-9">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="usercheck"> 记住密码
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-1 col-sm-9">
+            <button type="button" class="btn btn-primary" id="signinSubmit">登录</button>
+          </div>
+        </div>
+      </form>
+</div>
+  <div class="footer">
+    <p><a href="/" data-toggle="tooltip" data-placement="left" title="不知道自己在哪?">回到浅夏博客 →</a></p>
+  </div>
+</div>
+
+<script src="/static/admin/js/bootstrap.min.js"></script> 
+
+<script>
+
+$('[data-toggle="tooltip"]').tooltip();
+
+$(function(){
+	$('.Captcha-img img').click(function(){
+		$('.Captcha-img img').attr({'src':'/admin/index/getCaptcha'});
+	})
+})
+
+//按Enter键的触发事件
+$(":input").keydown(function(e){
+  if(e.keyCode == 13){
+    $('#signinSubmit').click();
+  }
+})
+//提交表单事件
+$('#signinSubmit').click(function(){
+	if($('#admin_name').val() == ''){
+		$(this).text('用户名不能为空');
+		$('#admin_name').focus();
+	}else if($('#admin_password').val() == ''){
+		$(this).text('密码不能为空');
+		$('#admin_password').focus();
+	}else if($('#Captcha').val() == null){
+		$(this).text('请填写验证码');
+		$('#Captcha').focus();
+	}else{
+		$(this).text('请稍后...');
+      //异步提交表单验证
+      $.ajax({
+        type:'post',
+        url:"{:url('/admin/index/loginCheck')}",
+        data:$('#login').serialize(),
+        dataType:'json',
+        success:function(data){
+          switch(data.status)
+          {
+            case 1:
+	            window.location.href="{:url('admin/index/main')}";
+            	break;
+            case 0:
+            	$('#signinSubmit').text(data.message);
+            	$('#Captcha').val('');
+            	$('.Captcha-img img').attr({'src':'/admin/index/getCaptcha'});
+            	break;
+            case 2:
+	            $('.Captcha-img img').attr({'src':'/admin/index/getCaptcha'});
+	            $('#signinSubmit').text(data.message);//验证码有误
+	            $('#Captcha').val('');
+	            $('#Captcha').focus();
+           		break;
+            case -1:
+            	$('#Captcha').val('');
+            	$('#signinSubmit').text(data.message);//格式有误
+          }
+        }
+      })      
+
+
+	}
+});
+</script>
+</body>
+</html>

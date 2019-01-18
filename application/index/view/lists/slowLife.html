@@ -1,0 +1,26 @@
+{extend name="public/base"/}
+{block name="body"}
+
+<article>  
+  <div class="sleftbox"> 
+  <div class="infos"> 
+    <div class="newblogs">
+      <h2 class="hometitle"><span>不是懒惰，放慢速度不是拖延时间，而是让我们在生活中寻找到平衡。</span>慢生活</h2>
+      <ul>
+      {volist name='$notice_data' id='list'}
+        <li>
+          <h3 class="blogtitle"><a href="listview.html?id={$list.id}" target="_blank" >{$list.title}</a></h3>
+          <div class="bloginfo">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;{if strlen($list.content_desc)>152}{:mb_substr($list.content_desc,0,152,'utf-8').'......'}{else}{$list.content_desc}{/if}</p>
+          </div>
+          <div class="autor"><span class="lm f_l"><a href="/jstt/css3/" title="css3" target="_blank"  class="classname">{$list.keyword}</a></span><span class="dtime f_l">{$list.create_time}</span><span class="viewnum f_l">浏览（<a href="/">{$list.pv}</a>）</span><span class="f_r"><a href="slowLifeView.html?id={$list.id}" class="more">阅读原文>></a></span></div>
+        </li>
+      {/volist}
+      <li>{$notice_data->render()}</li>
+      </ul>
+    </div>
+  </div>
+  </div>  
+  <div class="srightbox">
+    
+{/block}

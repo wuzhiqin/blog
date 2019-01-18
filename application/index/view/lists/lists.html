@@ -1,0 +1,30 @@
+{extend name="public/base"/}
+{block name="body"}
+
+<article>  
+  <div class="sleftbox"> 
+  <div class="infos"> 
+    <div class="newblogs">
+      <h2 class="hometitle"><span>不要轻易放弃。学习成长的路上，我们长路漫漫，只因学无止境。</span>{$title|default="学无止境"}</h2>
+      <ul>
+      {if isset($article_data.0)}
+      {volist name='article_data' id='list'}
+        <li>
+          <h3 class="blogtitle"><a href="listview.html?id={$list.id}" target="_blank" >{$list.title}</a></h3>
+          <div class="bloginfo">{if $list.titlepic==''}{else}<span class="blogpic"><a href="listview.html?id={$list.id}" title="{$list.title}"><img src="{$list.titlepic}" alt="{$list.title}" /></a></span>{/if}
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;{if strlen($list.content_desc)>152}{:mb_substr($list.content_desc,0,152,'utf-8').'......'}{else}{$list.content_desc}{/if}</p>
+          </div>
+          <div class="autor"><span class="lm f_l"><a href="tags.html?tags={$list.tags}" title="css3" target="_blank"  class="classname">{$list.tags}</a></span><span class="dtime f_l">{$list.create_time}</span><span class="viewnum f_l">浏览（<a href="/">{$list.pv}</a>）</span><span class="f_r"><a href="listview.html?id={$list.id}" class="more">阅读原文>></a></span></div>
+        </li>
+      {/volist}
+      	<li>{$article_data->render()}</li>
+      {else}
+      	 <h3 class="blogtitle">未搜索到相关数据！</h3>
+      {/if}	
+      </ul>
+    </div>
+  </div>
+  </div>  
+  <div class="srightbox">
+    
+{/block}

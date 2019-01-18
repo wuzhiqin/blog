@@ -1,0 +1,60 @@
+{extend name="public/base"/}
+{block name="body"}
+
+<article>
+  <div class="sleftbox">
+    <div class="infos">
+      <div class="newsview">
+        <h2 class="intitle">您现在的位置是：<a href="/">首页</a>&nbsp;>&nbsp;<a href="{if !isset($navs)}/lists.html{else}slowLife.html{/if}">{$navs|default="学无止境"}</a>&nbsp;>&nbsp;<a href="keyword.html?keyword={$article_data.keyword}">{$article_data.keyword}</a></h2>
+        <h3 class="news_title">{$article_data.title}</h3>
+        <div class="news_author"><span class="au01">{if isset($article_data.authors)}作者：{$article_data.authors}{else}日记{/if}</span><span class="au02">时间：{$article_data.create_time}</span><span class="au03">阅读量：{$article_data.pv}次</span></div>
+        {if isset($article_data.tags)}<div class="tags"><a href="tags.html?tags={$article_data.tags}" target="_blank">{$article_data.tags} </a></div>{/if}
+        <div class="news_about"><strong>简介</strong>{$article_data.content_desc}</div>
+        <div class="news_infos">
+        {$article_data.content}
+        </div>
+      </div>
+      <div class="share"> 
+        <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare"> <span class="bds_more">分享到：</span> <a class="bds_qzone"></a> <a class="bds_tsina"></a> <a class="bds_tqq"></a> <a class="bds_renren"></a> <a class="bds_t163"></a> <a class="shareCount"></a> </div>
+        <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6574585" ></script> 
+        <script type="text/javascript" id="bdshell_js"></script> 
+        <script type="text/javascript">
+            document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+        </script> 
+        <!-- Baidu Button END --> 
+      </div>
+    </div>
+    <div class="nextinfo">
+      <p>上一篇：{if !isset($lastdata.0.title)}没有文章了！{else}<a href='listview.html?id={$lastdata.0.id}' title="{$lastdata.0.title}">{$lastdata.0.title}</a>{/if}</p>
+      <p>下一篇：{if !isset($nextdata.0.title)}没有文章了！{else}<a href='listview.html?id={$nextdata.0.id}' title="{$nextdata.0.title}">{$nextdata.0.title}</a>{/if}</p>
+    </div>
+    <div class="otherlink">
+    {if isset($recommend)}
+      <h2>相关文章</h2>
+      <ul>{volist name='$recommend' id='list'}
+   		<li><a href="listview.html?id={$list.id}" title="{$list.title}">{$list.title}</a></li>      
+          {/volist}
+      </ul>
+     {/if}
+    </div>
+    <div class="news_pl">
+      <h2>文章评论</h2>
+      <ul>
+<div class="gbko">
+<!--高速版-->
+<div id="SOHUCS" sid="809" ></div>
+<script charset="utf-8" type="text/javascript" src="/static/home/js/changyan.js" ></script>
+<script type="text/javascript">
+window.changyan.api.config({
+appid: 'cyt6UkrdY',
+conf: 'prod_37667ae67efaadf448cac07713d3165a'
+});
+</script>
+</div>
+      </ul>
+    </div>
+  </div>
+  <div class="rightbox">
+    
+{/block}

@@ -1,0 +1,82 @@
+﻿
+#用户表
+create table blog_user(
+user_id int primary key auto_increment comment '分类id',
+name varchar(32) default '渣渣辉' comment '姓名',
+user_name varchar(32) comment '用户名',
+user_phone char(11) comment '手机号码',
+user_password varchar(32) comment '密码',
+user_power int(2) default 0 comment '权限，0普通，1最高'
+)engine innoDB default charset utf8;
+
+
+#管理员表
+create table blog_admin(
+admin_id int primary key auto_increment comment '分类id',
+admin varchar(32) default '渣渣辉' comment '姓名',
+admin_name varchar(32) comment '用户名',
+admin_phone char(11) comment '手机号码',
+admin_password varchar(32) comment '密码',
+admin_power int(2) default 0 comment '权限，0普通，1最高'
+)engine innoDB default charset utf8;
+
+#文章表
+create table blog_article(
+id int primary key auto_increment,
+title varchar(128) comment '文章标题',
+titlepic varchar(255) comment '标题图片',
+content_desc varchar(500) comment '内容描述',
+content text comment '文章内容',
+tags varchar(125) comment '标签',
+authors varchar(125) default '浅夏' comment '作者',
+keyword varchar(125) default '学习' comment '关键字',
+category_id int comment '栏目主键',
+status int(4) comment'是否公开,1为公开,0为加密',
+create_time int(10) comment '创建时间',
+update_time int(10) comment '更新时间',
+pv int(10) default 0 comment '阅读量',
+is_host int(4) default 0 comment '是否热门',
+is_top int(4) default 0 comment '是否置顶,0为不置顶'
+)engine innoDB default charset utf8;
+
+
+
+#日记表
+create table blog_diary(
+id int primary key auto_increment,
+title varchar(128) comment '日记标题',
+content_desc varchar(500) comment '内容描述',
+content text comment '日记内容',
+keyword varchar(125) default '生活' comment '关键字',
+status int(4) comment'是否公开,1为公开,0为加密',
+pv int(10) default 0 comment '阅读量',
+create_time int(10) comment '创建时间',
+update_time int(10) comment '更新时间',
+is_host int(4) default 0 comment '是否热门',
+is_top int(4) default 0 comment '是否置顶,0为不置顶'
+)engine innoDB default charset utf8;
+
+
+#登录记录表
+create table login_record(
+id int primary key auto_increment comment '分类id',
+admin varchar(32) default '捣乱者' comment '登录者',
+host_ip varchar(32) comment 'ip',
+ip_address varchar(128) comment 'IP地址',
+address varchar(128) comment '登录地址',
+login_time int(10) comment '登录时间',
+state int(2) default 0 comment '登录状态，0失败，1成功'
+)engine innoDB default charset utf8;
+
+原生查询语句
+select * from login_record group by login_time desc;
+查询最后一次登陆时间
+select * from login_record where admin = 'admin'  group by login_time desc limit 0,1;
+
+#栏目表
+create table blog_article_category(
+id int comment '主键',
+name varchar(30) comment '栏目名称',
+alias varchar(30) comment '栏目别名',
+status int comment '状态1启用0禁用',
+)engine innoDB default charset utf8;

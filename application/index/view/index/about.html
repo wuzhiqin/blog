@@ -1,0 +1,48 @@
+{extend name="public/base"/}
+{block name="body"}
+<article>
+  <div class="sleftbox">
+    <div class="infos">
+      <div class="newsview">
+        <h2 class="intitle">您现在的位置是：<a href="/">网站首页</a>&nbsp;&gt;&nbsp;<a href="/about.html">关于我</a></h2>
+        <div class="news_infos m20">
+
+<p>“学会接受孤独，你才能够过得更好。”“只有好好学习，你才能够变成一个优秀的人啊。”</br>
+<br>
+“可我这一生，听过无数的大道理，却仍然无法变成他们所期望的、我自己想要成为的那种人。”<br>
+<br>
+“那么，问题到底出现在哪里？我对于这个问题的观点是，我们所听过大部分道理，都是以方法为中心，而不是以所遇到的问题为中心来表达。“<br>
+<br>
+</p>
+<p>
+”人生就是一个得与失的过程，而我却是一个幸运者，得到的永远比失去的多。在学习使用Photoshop、Flash、Dreamweaver、ASP、PHP、JSP...中激发了兴趣，然后越走越远....“</p>
+<p>”喜欢一句话&ldquo;冥冥中该来则来，无处可逃&rdquo;。“<br />
+<br />
+“当您驻足停留过，我们已是朋友，后端的路上我再也不用一个人独自行走。”</p>
+
+        </div>
+      </div>
+    </div>
+    <div class="meandblog">
+      <h2>我和我的博客</h2>
+      <ul>
+      {volist name="about_data" id="list"}
+ 		<li><a href="slowLifeView.html?id={$list.id}" target="_blank">{$list.title}</a></li>
+	  {/volist}
+      </ul>
+    </div>
+  </div>
+  <div class="rightbox">
+    <div class="aboutme" id="aboutme">
+      <h2 class="ab_title">关于我</h2>
+      <div class="avatar"><img src="/static/home/picture/head.jpg" /></div>
+      <div class="ab_con">
+        <p>网名：浅夏 | Black | 吴志钦</p>
+        <p>职业：PHP程序员 </p>
+        <p>QQ：1248628803</p>
+        <p>邮箱：w1248628803@live.cn</p>
+      </div>
+    </div>
+{/block}
+{block name="search"}
+{/block}

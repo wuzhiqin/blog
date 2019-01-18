@@ -1,0 +1,94 @@
+{extend name="public/base"/}
+{block name="body"}
+
+<article>  
+  <section class="swops">
+      <figure id="content_slider" class="swipslider">
+        <ul class="sw-slides">
+          <li class="sw-slide">
+            <figure class="sw-content">
+              <img src="/static/home/picture/1.jpg" alt="Mafia Boss">
+            </figure>
+          </li>
+          <li class="sw-slide">
+            <figure class="sw-content">
+              <img src="/static/home/picture/2.jpg" alt="Mafia Boss">
+            </figure>
+          </li>
+          <li class="sw-slide">
+            <figure class="sw-content">
+              <img src="/static/home/picture/3.jpg" alt="Mafia Boss">
+            </figure>
+          </li>
+          <li class="sw-slide">
+            <figure class="sw-content">
+              <img src="/static/home/picture/4.jpg" alt="Mafia Boss">
+            </figure>
+          </li>
+          <li class="sw-slide">
+            <figure class="sw-content">
+              <img src="/static/home/picture/5.jpg" alt="Mafia Boss">
+            </figure>
+          </li>
+        </ul>
+      </figure>
+  </section>
+  <script type="text/javascript" src="/static/home/dist/swipeslider.min.js"></script>
+  <script type="text/javascript">
+    $(window).load(function() {
+          $('#content_slider').swipeslider({
+            transitionDuration: 600,
+            autoPlayTimeout: 10000,
+            sliderHeight: '400px'
+          });
+
+          var Widths = $(window).width();
+          if(Widths < 480){
+              $('#content_slider').css('padding-top','188px');
+              $('.sw-bullet').css('margin-bottom','15px');
+            }else{
+              $('#content_slider').css('padding-top','400px')
+            }
+          $(window).resize(function(){ 
+            var Widths = $(window).width();
+            if(Widths < 786){
+              $('#content_slider').css('padding-top','188px');
+              $('.sw-bullet').css('margin-bottom','15px');
+            }else{
+              $('#content_slider').css('padding-top','400px')
+            }
+          })
+        });
+  </script>
+  
+  <div class="sleftbox">
+  <div class="infos">  
+    <div class="newblogs">
+      <h2 class="hometitle">最新文章</h2>
+      <ul>
+      {volist name='article_data' id='list'}
+        <li>
+          <h3 class="blogtitle"><a href="listview.html?id={$list.id}" target="_blank" >{$list.title}</a></h3>
+          <div class="bloginfo">{if $list.titlepic==''}{else}<span class="blogpic"><a href="listview.html?id={$list.id}" title="{$list.title}"><img src="{$list.titlepic}" alt="{$list.title}" /></a></span>{/if}
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;{if strlen($list.content_desc)>152}{:mb_substr($list.content_desc,0,152,'utf-8').'......'}{else}{$list.content_desc}{/if}</p>
+          </div>
+          <div class="autor"><span class="lm f_l"><a href="tags.html?tags={$list.tags}" title="css3" target="_blank"  class="classname">{$list.tags}</a></span><span class="dtime f_l">{:date('Y-m-d',$list.create_time)}</span><span class="viewnum f_l">浏览（<a href="/">{$list.pv}</a>）</span><span class="f_r"><a href="listview.html?id={$list.id}" class="more">阅读原文>></a></span></div>
+        </li>
+      {/volist}
+      </ul>
+    </div>
+   </div>
+  </div>  
+  <div class="srightbox">
+    <div class="aboutme" id="aboutme">
+      <h2 class="ab_title">关于我</h2>
+      <div class="avatar"><img src="/static/home/picture/head.jpg" /></div>
+      <div class="ab_con">
+        <p>网名：浅夏 | Black | 吴志钦</p>
+        <p>职业：PHP程序员 </p>
+        <p>QQ：1248628803</p>
+        <p>邮箱：w1248628803@live.cn</p>
+      </div>
+    </div>
+
+{/block}
