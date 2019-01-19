@@ -29,10 +29,11 @@ class Login extends Controller
 
         //1.获取token
         $tokenUrl = 'https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id='.$this->appId.'&client_secret='.$this->appKey.'&code='.$code.'&redirect_uri='.$this->redirectUri;
-        $getTokenRes = file_get_contents($tokenUrl);
-        $getTokenRes = explode('&',$getTokenRes);
+        $getTokenRes = file_get_contents($tokenUrl);dump($getTokenRes);
+        $getTokenRes = explode('&',$getTokenRes);dump($getTokenRes);
         $token = substr($getTokenRes[0],13);
 
+        exit;
         //2.获取openId
         $openIdUrl = 'https://graph.qq.com/oauth2.0/me?access_token='.$token;
         $getOpenIdRes = file_get_contents($openIdUrl);
