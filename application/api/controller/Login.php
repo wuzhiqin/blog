@@ -46,7 +46,7 @@ class Login extends Controller
         $getUserInfoUrl = 'https://graph.qq.com/user/get_user_info?access_token='.$token.'&oauth_consumer_key='.$this->appId.'&openid='.$getOpenIdRes['openid'];
         $userInfo = file_get_contents($getUserInfoUrl);
         if (stripos($userInfo,'error')) return $userInfo;
-        return $userInfo;
+        echo $userInfo;exit;
         $userInfo = json_decode($userInfo,1);
         dump($userInfo);
 
