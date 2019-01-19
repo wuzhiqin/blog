@@ -14,11 +14,6 @@ use  qc\api\QC;
 class Test extends Base
 {
 
-    public function ts()
-    {
-        echo 'hello word';
-    }
-
     public function tt()
     {
         session_start();
@@ -30,6 +25,11 @@ class Test extends Base
 
         $qc = new QC();
         $qc->qq_login();
+    }
+
+    public function tts()
+    {
+        echo (new QC())->get_openid();
     }
 
     //异地登录测试
