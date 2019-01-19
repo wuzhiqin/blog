@@ -9,7 +9,9 @@
 namespace app\api\controller;
 
 
-class Login
+use think\Controller;
+
+class Login extends Controller
 {
     private $redirectUri = 'http://wuzhiqin.xyz/api/login/check';   //回调地址
     private $appId = '101546764';                                      //appId
@@ -18,8 +20,13 @@ class Login
     public function check()
     {
         $data = $_GET;
-        $code = $data['code'];
-        $state = $data['state'];
+        if (empty($data['code']) | empty($data['state'])){
+            $this->redirect('/index');
+        }else{
+            $state = $data['state'];
+            $code = $data['code'];
+        }
+
         //1.获取token
         $tokenUrl = 'https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id='.$this->appId.'&client_secret='.$this->appKey.'&code='.$code.'&redirect_uri='.$this->redirectUri;
         $getTokenRes = file_get_contents($tokenUrl);
